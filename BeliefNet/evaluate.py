@@ -83,10 +83,14 @@ def evaluate_loss(
 
 if __name__ == "__main__":
     base_dir = Path(__file__).resolve().parent
-    data_file = base_dir / "../prepare_data/data_d64_m32_lamda0.9_example.h5"
-    model_folder_path = base_dir / "Model_m32_example/full_matrix/cpu_char_i2000_b10_dr0.1_d64"# edit this
-    model_file_name = "learning_filter.pt"#
-    data_split = "z_test"  # "z_train", "z_validation", or "z_test" 
+    data_file = base_dir / "../prepare_data/data_d64_m128_lamda0.9_example.h5"
+    model_folder_path = base_dir / "Model_m128/full_matrix/cpu_char_i2000_b10_dr0.1_d64"
+    model_file_name = "learning_filter.pt"
+    data_split = "z_validation"
+    # data_file = base_dir / "../prepare_data/data_d64_m32_lamda0.9_example.h5"
+    # model_folder_path = base_dir / "Model_m32_example/full_matrix/cpu_char_i2000_b10_dr0.1_d64"# edit this
+    # model_file_name = "learning_filter.pt"#
+    # data_split = "z_test"  # "z_train", "z_validation", or "z_test" 
 
     # Reconstruct evaluation dataset
     evaluation_dataset = reconstruct_loaders_from_hdf5(data_file, data_split)

@@ -11,7 +11,7 @@
     "lr": 0.1,
     "dropout": 0.1,
 
-    "mode": "visual",
+    "mode": "train",
     "device": "cpu",
        
     "start_text": "The",
