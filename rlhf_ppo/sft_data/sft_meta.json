@@ -1,0 +1,91 @@
+{
+  "format": {
+    "prompt": "a (MSB first) + b (MSB first) =",
+    "response": "a+b, LSB first, scale+1 bits, then <EOS>",
+    "tokens": [
+      "0",
+      "1",
+      "+",
+      "=",
+      "<EOS>",
+      "<PAD>"
+    ],
+    "fields": [
+      "scale",
+      "a",
+      "b",
+      "carry_run",
+      "prompt",
+      "response",
+      "text"
+    ],
+    "sft_loss": "cross-entropy on `response` tokens only; `prompt` tokens are context (masked)"
+  },
+  "seed": 0,
+  "train_total": 20238,
+  "val_total": 534,
+  "train": {
+    "2": {
+      "examples": 14,
+      "hard_carry_examples": null,
+      "mean_carry_run": 0.571
+    },
+    "4": {
+      "examples": 224,
+      "hard_carry_examples": null,
+      "mean_carry_run": 1.513
+    },
+    "8": {
+      "examples": 20000,
+      "hard_carry_examples": 6000,
+      "mean_carry_run": 3.747
+    }
+  },
+  "val": {
+    "2": {
+      "examples": 2,
+      "hard_carry_examples": null,
+      "mean_carry_run": 1.0
+    },
+    "4": {
+      "examples": 32,
+      "hard_carry_examples": null,
+      "mean_carry_run": 1.25
+    },
+    "8": {
+      "examples": 500,
+      "hard_carry_examples": 150,
+      "mean_carry_run": 3.592
+    }
+  },
+  "problem_space_pairs": {
+    "2": 16,
+    "4": 256,
+    "8": 65536
+  },
+  "exhaustive_scales": [
+    2,
+    4
+  ],
+  "hard_definition": "longest carry chain >= {8: 6} (8-bit only)",
+  "excluded_eval_sets": [
+    {
+      "seed": 1234,
+      "prompts_per_scale": 200,
+      "scales_excluded": [
+        8
+      ]
+    },
+    {
+      "seed": 4321,
+      "prompts_per_scale": 1000,
+      "scales_excluded": [
+        8
+      ]
+    }
+  ],
+  "notes": [
+    "2- and 4-bit use every pair (16 and 256 in total); the eval sets cover these spaces, so only 8-bit accuracy measures generalisation.",
+    "Scale counts are very unbalanced; sample scales evenly during SFT."
+  ]
+}

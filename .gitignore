@@ -217,3 +217,8 @@ Model_m128/
 BeliefNet/Model_m128/
 NanoGPT/m128_d64_1l1h/
 NanoGPT/m128_d64_4l4h/
+*.h5
+*.hdf5
+*.pt
+*.log
+__pycache__/

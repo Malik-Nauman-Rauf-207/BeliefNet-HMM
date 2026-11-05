@@ -1,0 +1,11 @@
+
+# Run artifacts, binary weights, and checkpoint folders
+.DS_Store
+*/.DS_Store
+*.h5
+*.hdf5
+*.pt
+Model_m128/
+BeliefNet/Model_m128/
+NanoGPT/m128_d64_1l1h/
+NanoGPT/m128_d64_4l4h/

@@ -34,7 +34,8 @@ from hmm_oracle import HMMOracle
 # ----------------------------------------------------------------------------- settings
 OBJECTIVE = "forward"           # "reverse" | "forward"
 BELIEFNET_FOLDER = os.path.abspath("../BeliefNet/Model_m128/full_matrix/cpu_char_i10000_b10_dr0.1_d64")
-START_PATH = os.path.join(BELIEFNET_FOLDER, "learning_filter.pt")   # or an exported .h5 / our .pt
+START_PATH = os.path.abspath("beliefnet_m128.pt")
+# START_PATH = os.path.join(BELIEFNET_FOLDER, "learning_filter.pt")   # or an exported .h5 / our .pt
 data_file = os.path.abspath("../prepare_data/data_d64_m128_lamda0.9_example.h5")
 
 num_epochs = 300

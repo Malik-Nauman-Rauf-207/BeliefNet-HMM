@@ -41,7 +41,8 @@ MODE = "exact"                  # "exact" | "sampled"
 #   learning_hmm_...h5  -> the file written by `training.py ... --mode get_matricies`
 # BELIEFNET_FOLDER = os.path.abspath("../BeliefNet/Model_m128/full_matrix/cpu_char_i2000_b10_dr0.1_d64")
 BELIEFNET_FOLDER = os.path.abspath("../BeliefNet/Model_m128/full_matrix/cpu_char_i10000_b10_dr0.1_d64")
-REWARD_MODEL_PATH = os.path.join(BELIEFNET_FOLDER, "learning_filter.pt")
+REWARD_MODEL_PATH = os.path.abspath("beliefnet_m128.pt")
+# REWARD_MODEL_PATH = os.path.join(BELIEFNET_FOLDER, "learning_filter.pt")
 
 num_epochs = 50
 num_batches_per_epoch = 10
