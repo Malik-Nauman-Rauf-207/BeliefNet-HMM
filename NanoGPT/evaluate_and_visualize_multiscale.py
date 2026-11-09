@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from model import GPT, GPTConfig
 
 device = 'cpu'
-ckpt_path = 'out_binary_addition_multiscale/ckpt.pt'
+ckpt_path = 'out_binary_addition_multiscale_embd128_mps/ckpt.pt'
 
 print(f"Loading checkpoint from: {ckpt_path}")
 checkpoint = torch.load(ckpt_path, map_location=device)

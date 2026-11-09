@@ -2,17 +2,17 @@
 """
 SFT (supervised fine-tuning) of the pretrained binary-addition NanoGPT -- the standalone first stage.
 
-Trains on sft_data/sft_train.jsonl with cross-entropy on the RESPONSE tokens only (the prompt is context),
-scale-balanced batches (2/4/8-bit equally often), validates on sft_data/sft_val.jsonl, and keeps the best-validation
-weights. Prints the exact-match accuracy of the pretrained base and of the SFT model on the same fixed eval set the
-PPO scripts use, so the SFT gain is directly comparable.
+Trains on sft_data/sft_train.jsonl (2/4/8/16-bit) with cross-entropy on the RESPONSE tokens only (the prompt is
+context). Batches are weighted across scales (SFT_BATCH, close to the pretraining mix), validation is on
+sft_data/sft_val.jsonl, and the best-validation weights are kept. Prints the exact-match accuracy of the pretrained
+base and of the SFT model on the same fixed eval set the PPO scripts use, so the SFT gain is directly comparable.
 
 Output (out_binary_addition_sft/): ckpt_sft.pt, sft_metrics.csv, sft_training_curves.png
 (train CE, validation CE per scale, greedy accuracy vs the pretrained baseline, KL to the pretrained model,
 entropy, token accuracy).
 ckpt_sft.pt has the same layout as the pretraining checkpoint, so PPO can start from it: in
-train_ppo_binary_addition.py set  base_ckpt_path = os.path.join(current_dir, 'out_binary_addition_sft', 'ckpt_sft.pt')
-(the SFT model is then also the KL reference).
+train_ppo_binary_addition.py set  START_CKPT = os.path.join(current_dir, 'out_binary_addition_sft', 'ckpt_sft.pt')
+(or just run train_sft_ppo_binary_addition.py, which does SFT and then PPO in one go).
 
 Run from rlhf_ppo/ (needs sft_data/ from make_sft_dataset.py):   python sft_binary_addition.py
 """
@@ -44,8 +44,8 @@ from model import GPT, GPTConfig
 device = 'cpu'
 base_ckpt_path = os.path.join(nanogpt_dir, 'out_binary_addition_multiscale', 'ckpt.pt')
 SFT_DATA_DIR = os.path.join(current_dir, 'sft_data')
-SCALES = [2, 4, 8]              # operand bit-widths used for training and evaluation
-MAX_NEW_TOKENS = 12             # must cover the longest answer: (max scale + 1) bits + <EOS>
+SCALES = [2, 4, 8, 16]          # operand bit-widths (the pretraining data is 6/17/33/44% of these)
+MAX_NEW_TOKENS = 18             # must cover the longest answer: (max scale + 1) bits + <EOS>
 EVAL_PROMPTS_PER_SCALE = 200
 SEED = 0
 
@@ -94,11 +94,29 @@ def task_verifier(prompt_toks, gen_toks):
     return -1.0, False
 
 
-def make_prompts(scale, n, rng):
-    """n prompts of identical length (same scale) -> no padding needed."""
+HARD_MIN_RUN = {8: 6, 16: 10}   # "hard" = longest run of consecutive carries >= this (same as make_sft_dataset.py)
+
+
+def carry_run(a, b, bits):
+    """Longest run of consecutive carry-outs when adding a + b from the least significant bit."""
+    carry, run, best = 0, 0, 0
+    for j in range(bits):
+        s = ((a >> j) & 1) + ((b >> j) & 1) + carry
+        carry = 1 if s >= 2 else 0
+        run = run + 1 if carry else 0
+        best = max(best, run)
+    return best
+
+
+def make_prompts(scale, n, rng, hard_frac=0.0):
+    """n prompts of identical length (same scale) -> no padding needed. hard_frac > 0 forces that share of the prompts
+    to have a long carry chain (8/16-bit only); with hard_frac = 0 the random draws are exactly the plain uniform ones."""
+    n_hard = round(n * hard_frac) if scale in HARD_MIN_RUN else 0
     toks = []
-    for _ in range(n):
+    while len(toks) < n:
         a, b = rng.randint(0, (1 << scale) - 1), rng.randint(0, (1 << scale) - 1)
+        if len(toks) < n_hard and carry_run(a, b, scale) < HARD_MIN_RUN[scale]:
+            continue
         toks.append(format_prompt(a, b, scale)[0])
     return torch.tensor(toks, dtype=torch.long, device=device)
 
@@ -122,11 +140,12 @@ def response_mask(resp):
 
 
 # ----------------------------------------------------------------------------- load the pretrained model
-def load_base():
-    if not os.path.exists(base_ckpt_path):
-        raise FileNotFoundError(f"Base checkpoint not found: {base_ckpt_path}. Run the multi-scale pretraining first.")
-    print(f"[*] Loading base checkpoint: {base_ckpt_path}")
-    ckpt = torch.load(base_ckpt_path, map_location=device)
+def load_base(path=None):
+    path = path or base_ckpt_path
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Checkpoint not found: {path}. Run the multi-scale pretraining (or SFT) first.")
+    print(f"[*] Loading checkpoint: {path}")
+    ckpt = torch.load(path, map_location=device)
     conf = GPTConfig(**ckpt['model_args'])
     assert conf.vocab_size >= len(TOKENS), f"model vocab {conf.vocab_size} < token alphabet {len(TOKENS)}"
     assert MAX_NEW_TOKENS >= max(SCALES) + 2, "MAX_NEW_TOKENS must fit (max scale + 1) answer bits plus <EOS>"
@@ -171,13 +190,18 @@ def evaluate(model):
 
 def fmt_eval(e, mode="greedy"):
     return " | ".join(f"{s}-bit {e[f'eval_{mode}_acc_s{s}']:.1f}%" for s in SCALES)
+def write_csv(path, rows):
+    with open(path, 'w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=sorted({k for r in rows for k in r}))
+        w.writeheader()
+        w.writerows(rows)
 # <<< COMMON-END
 
 
 # >>> SFT-BEGIN
 # ----------------------------------------------------------------------------- SFT settings
-SFT_STEPS = 600
-SFT_BATCH_PER_SCALE = 16        # every step uses this many examples of EACH scale (scale-balanced)
+SFT_STEPS = 800
+SFT_BATCH = {2: 8, 4: 16, 8: 24, 16: 24}   # examples per scale per step (~ the 6/17/33/44% pretraining mix)
 SFT_LR = 5e-5
 SFT_LR_MIN_FRAC = 0.1           # cosine decay to this fraction of SFT_LR
 SFT_WARMUP_STEPS = 30
@@ -260,12 +284,12 @@ def run_sft(model):
         model.train()                                           # dropout on during SFT (if the model has any)
         for g in opt.param_groups:
             g["lr"] = lr_at(step)
-        loss = 0.0
-        for s in SCALES:                                        # scale-balanced: equal weight per scale
+        loss, total = 0.0, sum(SFT_BATCH.values())
+        for s in SCALES:                                        # each scale's mean CE, weighted by its share of the batch
             seq, P = train[s]
-            idx = torch.randint(len(seq), (SFT_BATCH_PER_SCALE,), device=device)
+            idx = torch.randint(len(seq), (SFT_BATCH[s],), device=device)
             ce, _ = response_ce(model, seq[idx], P)
-            loss = loss + ce / len(SCALES)
+            loss = loss + ce * SFT_BATCH[s] / total
         opt.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), SFT_GRAD_CLIP)
@@ -297,7 +321,7 @@ def plot_sft(rows, path, base_eval):
     x = [r["step"] for r in rows]
     fig, ax = plt.subplots(2, 3, figsize=(16, 8))
     ax[0, 0].plot(x, [r["train_ce"] for r in rows], color='#2ca02c', lw=2)
-    ax[0, 0].set_title("SFT train CE (response tokens, scale-averaged)"); ax[0, 0].set_yscale("log")
+    ax[0, 0].set_title("SFT train CE (response tokens, batch-weighted over scales)"); ax[0, 0].set_yscale("log")
     for s in SCALES:
         ax[0, 1].plot(x, [r[f"val_ce_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
         line, = ax[0, 2].plot(x, [r[f"eval_greedy_acc_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
@@ -318,11 +342,6 @@ def plot_sft(rows, path, base_eval):
     plt.close(fig)
 
 
-def write_csv(path, rows):
-    with open(path, 'w', newline='') as f:
-        w = csv.DictWriter(f, fieldnames=sorted({k for r in rows for k in r}))
-        w.writeheader()
-        w.writerows(rows)
 # <<< SFT-END
 
 # ----------------------------------------------------------------------------- main: base -> SFT
@@ -350,4 +369,4 @@ if __name__ == "__main__":
     print(f"\n[*] Saved {os.path.join(out_dir, 'ckpt_sft.pt')} (best-validation weights from SFT step {best_step}), "
           f"sft_metrics.csv and sft_training_curves.png")
     print("Note: 2- and 4-bit have only 16 / 256 possible problems, so those columns mostly measure memorisation; "
-          "8-bit is the generalisation signal.")
+          "8- and 16-bit are the generalisation signal.")

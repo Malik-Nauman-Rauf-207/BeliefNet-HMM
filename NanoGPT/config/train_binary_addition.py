@@ -1,6 +1,6 @@
 # NanoGPT Configuration for Multi-Scale Binary Addition (2, 4, 8, 16 bits)
 
-out_dir = 'out_binary_addition_multiscale'
+out_dir = 'out_binary_addition_multiscale_embd128_mps'
 eval_interval = 250
 eval_iters = 50
 log_interval = 25
@@ -20,7 +20,7 @@ block_size = 64      # Context length to accommodate 16-bit addition sequences
 # Architecture
 n_layer = 4
 n_head = 4
-n_embd = 64
+n_embd = 128
 dropout = 0.0
 
 # Optimization hyperparameters
@@ -31,5 +31,6 @@ min_lr = 1e-4
 beta2 = 0.99
 warmup_iters = 150
 
-device = 'cpu'
+device = 'mps'
+dtype = 'float32'       # use full precision for the MPS run
 compile = False

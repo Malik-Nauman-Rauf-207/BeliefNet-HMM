@@ -15,15 +15,22 @@
       "a",
       "b",
       "carry_run",
+      "carry_in",
       "prompt",
       "response",
       "text"
     ],
-    "sft_loss": "cross-entropy on `response` tokens only; `prompt` tokens are context (masked)"
+    "sft_loss": "response cross-entropy plus auxiliary carry-in classification at each LSB-first sum-bit step"
   },
   "seed": 0,
-  "train_total": 20238,
-  "val_total": 534,
+  "scales": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "train_total": 40238,
+  "val_total": 1034,
   "train": {
     "2": {
       "examples": 14,
@@ -38,7 +45,12 @@
     "8": {
       "examples": 20000,
       "hard_carry_examples": 6000,
-      "mean_carry_run": 3.747
+      "mean_carry_run": 3.737
+    },
+    "16": {
+      "examples": 20000,
+      "hard_carry_examples": 6000,
+      "mean_carry_run": 6.687
     }
   },
   "val": {
@@ -55,37 +67,51 @@
     "8": {
       "examples": 500,
       "hard_carry_examples": 150,
-      "mean_carry_run": 3.592
+      "mean_carry_run": 3.692
+    },
+    "16": {
+      "examples": 500,
+      "hard_carry_examples": 150,
+      "mean_carry_run": 6.7
     }
   },
   "problem_space_pairs": {
     "2": 16,
     "4": 256,
-    "8": 65536
+    "8": 65536,
+    "16": 4294967296
   },
   "exhaustive_scales": [
     2,
     4
   ],
-  "hard_definition": "longest carry chain >= {8: 6} (8-bit only)",
+  "hard_definition": "longest carry chain >= {8: 6, 16: 10} (8- and 16-bit only)",
   "excluded_eval_sets": [
     {
       "seed": 1234,
       "prompts_per_scale": 200,
       "scales_excluded": [
-        8
+        8,
+        16
       ]
     },
     {
       "seed": 4321,
       "prompts_per_scale": 1000,
       "scales_excluded": [
-        8
+        8,
+        16
       ]
     }
   ],
+  "pretraining_mix_for_reference": {
+    "2": "6%",
+    "4": "17%",
+    "8": "33%",
+    "16": "44%"
+  },
   "notes": [
-    "2- and 4-bit use every pair (16 and 256 in total); the eval sets cover these spaces, so only 8-bit accuracy measures generalisation.",
-    "Scale counts are very unbalanced; sample scales evenly during SFT."
+    "2- and 4-bit use every pair (16 and 256 in total); the eval sets cover these spaces, so only 8- and 16-bit accuracy measures generalisation.",
+    "Scale counts are very unbalanced; the SFT stage weights scales per step (SFT_BATCH)."
   ]
 }

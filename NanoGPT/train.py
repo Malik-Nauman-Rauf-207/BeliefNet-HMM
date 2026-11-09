@@ -1,5 +1,5 @@
 """
-Code trimmed down from NanoGpt, can only use cpu for now.
+Code trimmed down from NanoGPT; supports CPU, CUDA, or MPS single-device training.
 
 """
 
@@ -57,8 +57,8 @@ min_lr = 6e-5 # minimum learning rate, should be ~= learning_rate/10 per Chinchi
 # DDP settings
 backend = 'nccl' # 'nccl', 'gloo', etc.
 # system
-device = 'cpu' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1' etc., or try 'mps' on macbooks
-dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # 'float32', 'bfloat16', or 'float16', the latter will auto implement a GradScaler
+device = 'cpu' # examples: 'cpu', 'cuda', 'cuda:0', 'cuda:1', or 'mps'
+dtype = 'bfloat16' if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else 'float16' # override to float32 for MPS in the config
 compile = True # use PyTorch 2.0 to compile the model to be faster
 # -----------------------------------------------------------------------------
 config_keys = [k for k,v in globals().items() if not k.startswith('_') and isinstance(v, (int, float, bool, str))]
@@ -76,7 +76,9 @@ os.makedirs(out_dir, exist_ok=True)
 torch.manual_seed(1337 + seed_offset)
 torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
 torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
-device_type = 'cpu' # for later use in torch.autocast
+device_type = device.split(':')[0] # optimizer/device checks; this script currently uses full precision
+if device_type == 'mps' and not torch.backends.mps.is_available():
+    raise RuntimeError("device='mps' was requested, but PyTorch reports that MPS is unavailable")
 # note: float16 data type will automatically use a GradScaler
 ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torch.float16}[dtype]
 ctx = nullcontext() 
@@ -139,8 +141,11 @@ elif init_from == 'resume':
     iter_num = checkpoint['iter_num']
     best_val_loss = checkpoint['best_val_loss']
 
+# Keep model parameters on the same device as batches from get_batch().
+model = model.to(device)
+
 # initialize a GradScaler. If enabled=False scaler is a no-op
-scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+scaler = torch.cuda.amp.GradScaler(enabled=(device_type == 'cuda' and dtype == 'float16'))
 
 # optimizer
 optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)
