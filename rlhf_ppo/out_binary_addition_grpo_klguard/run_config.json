@@ -1,0 +1,23 @@
+{
+  "device": "auto",
+  "output_dir": "/Users/maliknaumanrauf/Desktop/UIUC/Offer/Courses/Research/Python_Code/nanogpt-assignment/nanoGPT/BeliefNet_Assignment/BeliefNet-HMM/rlhf_ppo/out_binary_addition_grpo_klguard",
+  "steps": 150,
+  "prompts_per_scale": 16,
+  "group_size": 4,
+  "eval_every": 10,
+  "eval_prompts_per_scale": 200,
+  "seed": 1234,
+  "actor_lr": 1e-06,
+  "kl_beta": 0.1,
+  "clip_eps": 0.2,
+  "target_kl": 0.005,
+  "max_kl_ref": 0.05,
+  "hard_prompt_frac": 0.3,
+  "adv_std_floor": 0.1,
+  "comparison_only": false,
+  "device_resolved": "mps",
+  "sft_checkpoint": "/Users/maliknaumanrauf/Desktop/UIUC/Offer/Courses/Research/Python_Code/nanogpt-assignment/nanoGPT/BeliefNet_Assignment/BeliefNet-HMM/rlhf_ppo/out_binary_addition_sft_ppo_embd128_mps_klguard/ckpt_sft.pt",
+  "ppo_checkpoint": "/Users/maliknaumanrauf/Desktop/UIUC/Offer/Courses/Research/Python_Code/nanogpt-assignment/nanoGPT/BeliefNet_Assignment/BeliefNet-HMM/rlhf_ppo/out_binary_addition_sft_ppo_embd128_mps_klguard/ckpt_sft_ppo.pt",
+  "group_completions": 4,
+  "sft_reference": true
+}

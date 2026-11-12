@@ -1,0 +1,73 @@
+model,scale,mode,scenario,n,exact_accuracy_pct,mean_bit_accuracy_pct,eos_rate_pct
+"PPO, KL-guard selected",2,greedy,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",2,sample,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",4,greedy,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",4,sample,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",8,greedy,long_carry,10,100.0,100.0,100.0
+"PPO, KL-guard selected",8,greedy,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",8,sample,long_carry,10,100.0,100.0,100.0
+"PPO, KL-guard selected",8,sample,random,10,100.0,100.0,100.0
+"PPO, KL-guard selected",16,greedy,long_carry,10,90.0,98.23529411764706,100.0
+"PPO, KL-guard selected",16,greedy,random,10,70.0,95.88235294117648,100.0
+"PPO, KL-guard selected",16,sample,long_carry,10,100.0,100.0,100.0
+"PPO, KL-guard selected",16,sample,random,10,80.0,95.88235294117648,100.0
+"PPO, first run best saved",2,greedy,random,10,100.0,100.0,100.0
+"PPO, first run best saved",2,sample,random,10,100.0,100.0,100.0
+"PPO, first run best saved",4,greedy,random,10,100.0,100.0,100.0
+"PPO, first run best saved",4,sample,random,10,100.0,100.0,100.0
+"PPO, first run best saved",8,greedy,long_carry,10,100.0,100.0,100.0
+"PPO, first run best saved",8,greedy,random,10,100.0,100.0,100.0
+"PPO, first run best saved",8,sample,long_carry,10,100.0,100.0,100.0
+"PPO, first run best saved",8,sample,random,10,100.0,100.0,100.0
+"PPO, first run best saved",16,greedy,long_carry,10,100.0,100.0,100.0
+"PPO, first run best saved",16,greedy,random,10,90.0,99.41176470588235,100.0
+"PPO, first run best saved",16,sample,long_carry,10,100.0,100.0,100.0
+"PPO, first run best saved",16,sample,random,10,80.0,98.23529411764706,100.0
+"PPO, first run final",2,greedy,random,10,100.0,100.0,100.0
+"PPO, first run final",2,sample,random,10,100.0,100.0,100.0
+"PPO, first run final",4,greedy,random,10,100.0,100.0,100.0
+"PPO, first run final",4,sample,random,10,100.0,100.0,100.0
+"PPO, first run final",8,greedy,long_carry,10,100.0,100.0,100.0
+"PPO, first run final",8,greedy,random,10,100.0,100.0,100.0
+"PPO, first run final",8,sample,long_carry,10,100.0,100.0,100.0
+"PPO, first run final",8,sample,random,10,100.0,100.0,100.0
+"PPO, first run final",16,greedy,long_carry,10,40.0,94.11764705882354,100.0
+"PPO, first run final",16,greedy,random,10,20.0,93.52941176470588,100.0
+"PPO, first run final",16,sample,long_carry,10,50.0,94.70588235294119,100.0
+"PPO, first run final",16,sample,random,10,20.0,93.52941176470588,100.0
+Pretrained 128d,2,greedy,random,10,100.0,100.0,100.0
+Pretrained 128d,2,sample,random,10,100.0,100.0,100.0
+Pretrained 128d,4,greedy,random,10,100.0,100.0,100.0
+Pretrained 128d,4,sample,random,10,100.0,100.0,100.0
+Pretrained 128d,8,greedy,long_carry,10,100.0,100.0,100.0
+Pretrained 128d,8,greedy,random,10,100.0,100.0,100.0
+Pretrained 128d,8,sample,long_carry,10,100.0,100.0,100.0
+Pretrained 128d,8,sample,random,10,100.0,100.0,100.0
+Pretrained 128d,16,greedy,long_carry,10,30.0,87.64705882352942,100.0
+Pretrained 128d,16,greedy,random,10,40.0,94.70588235294119,100.0
+Pretrained 128d,16,sample,long_carry,10,50.0,96.47058823529412,100.0
+Pretrained 128d,16,sample,random,10,30.0,90.58823529411765,100.0
+"SFT, KL-guard run",2,greedy,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",2,sample,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",4,greedy,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",4,sample,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",8,greedy,long_carry,10,100.0,100.0,100.0
+"SFT, KL-guard run",8,greedy,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",8,sample,long_carry,10,100.0,100.0,100.0
+"SFT, KL-guard run",8,sample,random,10,100.0,100.0,100.0
+"SFT, KL-guard run",16,greedy,long_carry,10,90.0,98.23529411764706,100.0
+"SFT, KL-guard run",16,greedy,random,10,70.0,97.64705882352942,100.0
+"SFT, KL-guard run",16,sample,long_carry,10,100.0,100.0,100.0
+"SFT, KL-guard run",16,sample,random,10,80.0,98.23529411764706,100.0
+"SFT, first 128d run",2,greedy,random,10,100.0,100.0,100.0
+"SFT, first 128d run",2,sample,random,10,100.0,100.0,100.0
+"SFT, first 128d run",4,greedy,random,10,100.0,100.0,100.0
+"SFT, first 128d run",4,sample,random,10,100.0,100.0,100.0
+"SFT, first 128d run",8,greedy,long_carry,10,100.0,100.0,100.0
+"SFT, first 128d run",8,greedy,random,10,100.0,100.0,100.0
+"SFT, first 128d run",8,sample,long_carry,10,100.0,100.0,100.0
+"SFT, first 128d run",8,sample,random,10,100.0,100.0,100.0
+"SFT, first 128d run",16,greedy,long_carry,10,100.0,100.0,100.0
+"SFT, first 128d run",16,greedy,random,10,90.0,99.41176470588235,100.0
+"SFT, first 128d run",16,sample,long_carry,10,100.0,100.0,100.0
+"SFT, first 128d run",16,sample,random,10,80.0,98.23529411764706,100.0

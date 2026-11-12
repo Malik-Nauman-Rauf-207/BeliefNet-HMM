@@ -1,0 +1,25 @@
+eos_rate_pct,exact_accuracy_pct,mean_bit_accuracy_pct,mode,model,n,scale
+100.0,100.0,100.0,greedy,SFT (KL-guard run),200,2
+100.0,100.0,100.0,sample,SFT (KL-guard run),200,2
+100.0,100.0,100.0,greedy,SFT (KL-guard run),200,4
+100.0,100.0,100.0,sample,SFT (KL-guard run),200,4
+100.0,100.0,100.0,greedy,SFT (KL-guard run),200,8
+100.0,100.0,100.0,sample,SFT (KL-guard run),200,8
+100.0,81.5,97.79411764705874,greedy,SFT (KL-guard run),200,16
+100.0,80.0,97.38235294117638,sample,SFT (KL-guard run),200,16
+100.0,100.0,100.0,greedy,GRPO (selected),200,2
+100.0,100.0,100.0,sample,GRPO (selected),200,2
+100.0,100.0,100.0,greedy,GRPO (selected),200,4
+100.0,100.0,100.0,sample,GRPO (selected),200,4
+100.0,100.0,100.0,greedy,GRPO (selected),200,8
+100.0,100.0,100.0,sample,GRPO (selected),200,8
+100.0,80.5,97.61764705882344,greedy,GRPO (selected),200,16
+100.0,79.0,97.23529411764696,sample,GRPO (selected),200,16
+100.0,100.0,100.0,greedy,PPO (selected),200,2
+100.0,100.0,100.0,sample,PPO (selected),200,2
+100.0,100.0,100.0,greedy,PPO (selected),200,4
+100.0,100.0,100.0,sample,PPO (selected),200,4
+100.0,100.0,100.0,greedy,PPO (selected),200,8
+100.0,100.0,100.0,sample,PPO (selected),200,8
+100.0,82.0,97.82352941176462,greedy,PPO (selected),200,16
+100.0,81.0,97.61764705882347,sample,PPO (selected),200,16

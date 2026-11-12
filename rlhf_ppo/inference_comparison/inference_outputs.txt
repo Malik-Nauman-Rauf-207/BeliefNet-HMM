@@ -1,0 +1,1020 @@
+
+================================================================================================
+2-bit random_1 | carry run=0
+Prompt:   00+10=
+Expected: 010<EOS>
+Pretrained 128d                  | greedy | 010<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 010<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 010<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 010<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 010<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 010<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_2 | carry run=0
+Prompt:   00+01=
+Expected: 100<EOS>
+Pretrained 128d                  | greedy | 100<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 100<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 100<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 100<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 100<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 100<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 100<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 100<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 100<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 100<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 100<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 100<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_3 | carry run=2
+Prompt:   11+11=
+Expected: 011<EOS>
+Pretrained 128d                  | greedy | 011<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 011<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 011<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 011<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 011<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 011<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 011<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 011<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 011<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 011<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 011<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 011<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_4 | carry run=2
+Prompt:   11+01=
+Expected: 001<EOS>
+Pretrained 128d                  | greedy | 001<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 001<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_5 | carry run=0
+Prompt:   00+00=
+Expected: 000<EOS>
+Pretrained 128d                  | greedy | 000<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 000<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_6 | carry run=0
+Prompt:   00+10=
+Expected: 010<EOS>
+Pretrained 128d                  | greedy | 010<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 010<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 010<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 010<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 010<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 010<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 010<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 010<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_7 | carry run=0
+Prompt:   00+11=
+Expected: 110<EOS>
+Pretrained 128d                  | greedy | 110<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 110<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_8 | carry run=0
+Prompt:   00+11=
+Expected: 110<EOS>
+Pretrained 128d                  | greedy | 110<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 110<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_9 | carry run=0
+Prompt:   10+01=
+Expected: 110<EOS>
+Pretrained 128d                  | greedy | 110<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 110<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 110<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 110<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+2-bit random_10 | carry run=1
+Prompt:   11+10=
+Expected: 101<EOS>
+Pretrained 128d                  | greedy | 101<EOS>                   | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 101<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 101<EOS>                   | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 101<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | greedy | 101<EOS>                   | bit=100.0% | EXACT
+PPO, first run final             | sample | 101<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 101<EOS>                   | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 101<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 101<EOS>                   | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 101<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 101<EOS>                   | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 101<EOS>                   | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_1 | carry run=2
+Prompt:   1011+1011=
+Expected: 01101<EOS>
+Pretrained 128d                  | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01101<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_2 | carry run=0
+Prompt:   1100+0010=
+Expected: 01110<EOS>
+Pretrained 128d                  | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01110<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_3 | carry run=1
+Prompt:   1010+0010=
+Expected: 00110<EOS>
+Pretrained 128d                  | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 00110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00110<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_4 | carry run=1
+Prompt:   1001+1001=
+Expected: 01001<EOS>
+Pretrained 128d                  | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01001<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_5 | carry run=2
+Prompt:   1110+0100=
+Expected: 01001<EOS>
+Pretrained 128d                  | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01001<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_6 | carry run=0
+Prompt:   1001+0000=
+Expected: 10010<EOS>
+Pretrained 128d                  | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 10010<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 10010<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 10010<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 10010<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_7 | carry run=2
+Prompt:   1011+1011=
+Expected: 01101<EOS>
+Pretrained 128d                  | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01101<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01101<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_8 | carry run=2
+Prompt:   1110+1101=
+Expected: 11011<EOS>
+Pretrained 128d                  | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 11011<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11011<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11011<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11011<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_9 | carry run=0
+Prompt:   0010+1100=
+Expected: 01110<EOS>
+Pretrained 128d                  | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01110<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01110<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+4-bit random_10 | carry run=4
+Prompt:   1111+0011=
+Expected: 01001<EOS>
+Pretrained 128d                  | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run final             | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01001<EOS>                 | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01001<EOS>                 | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_1 | carry run=5
+Prompt:   11011001+11111011=
+Expected: 001010111<EOS>
+Pretrained 128d                  | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001010111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001010111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001010111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001010111<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_2 | carry run=1
+Prompt:   11001011+10000100=
+Expected: 111100101<EOS>
+Pretrained 128d                  | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 111100101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 111100101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 111100101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 111100101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_3 | carry run=4
+Prompt:   11010111+11110101=
+Expected: 001100111<EOS>
+Pretrained 128d                  | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001100111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001100111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001100111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001100111<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_4 | carry run=0
+Prompt:   00001100+01110010=
+Expected: 011111100<EOS>
+Pretrained 128d                  | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 011111100<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 011111100<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 011111100<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 011111100<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_5 | carry run=0
+Prompt:   01000010+00011001=
+Expected: 110110100<EOS>
+Pretrained 128d                  | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 110110100<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 110110100<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 110110100<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 110110100<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_6 | carry run=4
+Prompt:   00110100+11011011=
+Expected: 111100001<EOS>
+Pretrained 128d                  | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 111100001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 111100001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 111100001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 111100001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_7 | carry run=2
+Prompt:   11110000+01001000=
+Expected: 000111001<EOS>
+Pretrained 128d                  | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000111001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000111001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000111001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000111001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_8 | carry run=4
+Prompt:   11110110+01110101=
+Expected: 110101101<EOS>
+Pretrained 128d                  | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 110101101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 110101101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 110101101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 110101101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_9 | carry run=5
+Prompt:   00111110+11101001=
+Expected: 111001001<EOS>
+Pretrained 128d                  | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 111001001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 111001001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 111001001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 111001001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit random_10 | carry run=1
+Prompt:   11110000+10000000=
+Expected: 000011101<EOS>
+Pretrained 128d                  | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000011101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000011101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000011101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000011101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_1 | carry run=6
+Prompt:   11110101+11001101=
+Expected: 010000111<EOS>
+Pretrained 128d                  | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 010000111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 010000111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 010000111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 010000111<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_2 | carry run=8
+Prompt:   11011101+01100111=
+Expected: 001000101<EOS>
+Pretrained 128d                  | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001000101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_3 | carry run=7
+Prompt:   11111110+11011110=
+Expected: 001110111<EOS>
+Pretrained 128d                  | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001110111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001110111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001110111<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001110111<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_4 | carry run=7
+Prompt:   10110110+01001111=
+Expected: 101000001<EOS>
+Pretrained 128d                  | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 101000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 101000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 101000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 101000001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_5 | carry run=8
+Prompt:   11111011+01000101=
+Expected: 000000101<EOS>
+Pretrained 128d                  | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000000101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_6 | carry run=8
+Prompt:   00101011+11010101=
+Expected: 000000001<EOS>
+Pretrained 128d                  | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000000001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_7 | carry run=8
+Prompt:   00001101+11110011=
+Expected: 000000001<EOS>
+Pretrained 128d                  | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 000000001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 000000001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_8 | carry run=6
+Prompt:   10100111+10011011=
+Expected: 010000101<EOS>
+Pretrained 128d                  | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 010000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 010000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 010000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 010000101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_9 | carry run=7
+Prompt:   00111110+11111110=
+Expected: 001111001<EOS>
+Pretrained 128d                  | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 001111001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 001111001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 001111001<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 001111001<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+8-bit long_carry_10 | carry run=7
+Prompt:   11101110+01010111=
+Expected: 101000101<EOS>
+Pretrained 128d                  | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 101000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, first run final             | sample | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 101000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 101000101<EOS>             | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 101000101<EOS>             | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_1 | carry run=9
+Prompt:   0100111011001010+0110100111111010=
+Expected: 00100011000111010<EOS>
+Pretrained 128d                  | greedy | 00100011000110010<EOS>     | bit= 94.1% | wrong
+Pretrained 128d                  | sample | 00100011000101010<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 00100011000111010<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00100011000111010<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00100011000101010<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 00100011000101010<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 00100011000111010<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00100011000111010<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00100011000110010<EOS>     | bit= 94.1% | wrong
+SFT, KL-guard run                | sample | 00100011000111010<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00100011000110001<EOS>     | bit= 82.4% | wrong
+PPO, KL-guard selected           | sample | 00100011000111010<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_2 | carry run=6
+Prompt:   1101111000000001+1010110000111111=
+Expected: 00000010010100011<EOS>
+Pretrained 128d                  | greedy | 00000010010100011<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 00000010010100011<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 00000010010100011<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00000010010100011<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00000010010101011<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 00000010010101011<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 00000010010100011<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00000010010100011<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00000010010100011<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00000010010100011<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00000010010100011<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00000010010100011<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_3 | carry run=15
+Prompt:   1110101011101010+0111011101110110=
+Expected: 00000110010001101<EOS>
+Pretrained 128d                  | greedy | 00000110010010101<EOS>     | bit= 88.2% | wrong
+Pretrained 128d                  | sample | 00000110010010101<EOS>     | bit= 88.2% | wrong
+SFT, first 128d run              | greedy | 00000110010001101<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00000110010001101<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 000001100100=0101<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | sample | 000001100100=0101<EOS>     | bit= 88.2% | wrong
+PPO, first run best saved        | greedy | 00000110010001101<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00000110010001101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00000110010001101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00000110010001101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00000110010001101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00000110010001101<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_4 | carry run=4
+Prompt:   0010001110010110+1100110001011110=
+Expected: 00101111111101110<EOS>
+Pretrained 128d                  | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 00101111111100001<EOS>     | bit= 76.5% | wrong
+SFT, first 128d run              | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00101111111100110<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 00101111111101110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00101111111100110<EOS>     | bit= 94.1% | wrong
+SFT, KL-guard run                | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00101111111100110<EOS>     | bit= 94.1% | wrong
+PPO, KL-guard selected           | greedy | 00101111111101110<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00101111111100001<EOS>     | bit= 76.5% | wrong
+
+================================================================================================
+16-bit random_5 | carry run=5
+Prompt:   0001000101111100+0110010000010111=
+Expected: 11001001101011100<EOS>
+Pretrained 128d                  | greedy | 11001001101010010<EOS>     | bit= 82.4% | wrong
+Pretrained 128d                  | sample | 11001001101010010<EOS>     | bit= 82.4% | wrong
+SFT, first 128d run              | greedy | 11001001101011100<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11001001101011100<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11001001101001100<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 11001001101001100<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 11001001101011100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11001001101011100<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11001001101011100<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11001001101011100<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11001001101011100<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11001001101011100<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_6 | carry run=2
+Prompt:   0101100011000011+0001011100101001=
+Expected: 00110111111101100<EOS>
+Pretrained 128d                  | greedy | 00110111111100100<EOS>     | bit= 94.1% | wrong
+Pretrained 128d                  | sample | 00110111111110100<EOS>     | bit= 88.2% | wrong
+SFT, first 128d run              | greedy | 00110111111101100<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00110111111101100<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00110111111101100<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00110111111101100<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00110111111101100<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_7 | carry run=14
+Prompt:   0001100010101100+1110011101010101=
+Expected: 10000000000000001<EOS>
+Pretrained 128d                  | greedy | 10000000000001001<EOS>     | bit= 94.1% | wrong
+Pretrained 128d                  | sample | 10000000000000001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 10000000000000001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 10000000000000001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 10000000000001001<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 10000000000001001<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 10000000000000001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 10000000000000001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 10000000000000001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 10000000000000001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 10000000000000001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 10000000000000001<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_8 | carry run=4
+Prompt:   0110000010000110+1111011110111001=
+Expected: 11111100000110101<EOS>
+Pretrained 128d                  | greedy | 11111100000110101<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 11111100000100101<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 11111100000110101<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11111100000110101<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11111100000101101<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | sample | 11111100000101101<EOS>     | bit= 88.2% | wrong
+PPO, first run best saved        | greedy | 11111100000110101<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11111100000110101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11111100000110101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11111100000110101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11111100000110101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11111100000110101<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit random_9 | carry run=6
+Prompt:   0000101001111011+0100001000011110=
+Expected: 10011001001100100<EOS>
+Pretrained 128d                  | greedy | 10011001001100100<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 10011001001111000<EOS>     | bit= 82.4% | wrong
+SFT, first 128d run              | greedy | 10011001001100100<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 10011001001101000<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | greedy | 10011001001101000<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | sample | 10011001001101000<EOS>     | bit= 88.2% | wrong
+PPO, first run best saved        | greedy | 10011001001100100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 10011001001101000<EOS>     | bit= 88.2% | wrong
+SFT, KL-guard run                | greedy | 10011001001101000<EOS>     | bit= 88.2% | wrong
+SFT, KL-guard run                | sample | 10011001001101000<EOS>     | bit= 88.2% | wrong
+PPO, KL-guard selected           | greedy | 10011001001101010<EOS>     | bit= 82.4% | wrong
+PPO, KL-guard selected           | sample | 10011001001101010<EOS>     | bit= 82.4% | wrong
+
+================================================================================================
+16-bit random_10 | carry run=5
+Prompt:   0110111111111100+0100011010000011=
+Expected: 11111110011011010<EOS>
+Pretrained 128d                  | greedy | 11111110011001010<EOS>     | bit= 94.1% | wrong
+Pretrained 128d                  | sample | 11111110011011010<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 11111110011010010<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | sample | 11111110011011010<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11111110011001010<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 11111110011001010<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 11111110011010010<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | sample | 11111110011011010<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11111110011010010<EOS>     | bit= 94.1% | wrong
+SFT, KL-guard run                | sample | 11111110011011010<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11111110011010010<EOS>     | bit= 94.1% | wrong
+PPO, KL-guard selected           | sample | 11111110011011010<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_1 | carry run=10
+Prompt:   0110110111001010+1001011011100010=
+Expected: 00110101001000001<EOS>
+Pretrained 128d                  | greedy | 00110101001011110<EOS>     | bit= 70.6% | wrong
+Pretrained 128d                  | sample | 00110101001000001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 00110101001000001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00110101001000001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00110101001001001<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 00110101001001001<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 00110101001000001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00110101001000001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00110101001000001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00110101001000001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00110101001000001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00110101001000001<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_2 | carry run=12
+Prompt:   1011010101000100+1001101010111111=
+Expected: 11000000000010101<EOS>
+Pretrained 128d                  | greedy | 11000000000001101<EOS>     | bit= 88.2% | wrong
+Pretrained 128d                  | sample | 11000000000000101<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 11000000000010101<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11000000000010101<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11000000000001101<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | sample | 11000000000001101<EOS>     | bit= 88.2% | wrong
+PPO, first run best saved        | greedy | 11000000000010101<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11000000000010101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11000000000010101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11000000000010101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11000000000010101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11000000000010101<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_3 | carry run=12
+Prompt:   0000111010111110+1101100101111011=
+Expected: 10011100000101110<EOS>
+Pretrained 128d                  | greedy | 10011100000100001<EOS>     | bit= 76.5% | wrong
+Pretrained 128d                  | sample | 10011100000111110<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 10011100000101110<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 10011100000101110<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 10011100000101110<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 10011100000101110<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 10011100000101110<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_4 | carry run=13
+Prompt:   0111010011011101+0000101111110110=
+Expected: 11001011000000010<EOS>
+Pretrained 128d                  | greedy | 11001011000011100<EOS>     | bit= 76.5% | wrong
+Pretrained 128d                  | sample | 11001011000010010<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 11001011000000010<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11001011000000010<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11001011000001100<EOS>     | bit= 82.4% | wrong
+PPO, first run final             | sample | 11001011000001100<EOS>     | bit= 82.4% | wrong
+PPO, first run best saved        | greedy | 11001011000000010<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11001011000000010<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11001011000000010<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11001011000000010<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11001011000000010<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11001011000000010<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_5 | carry run=11
+Prompt:   0100011011111110+0010110111001011=
+Expected: 10010011001011100<EOS>
+Pretrained 128d                  | greedy | 10010011001010100<EOS>     | bit= 94.1% | wrong
+Pretrained 128d                  | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 10010011001011100<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 10010011001001100<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 10010011001011100<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 10010011001010010<EOS>     | bit= 82.4% | wrong
+SFT, KL-guard run                | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 10010011001010010<EOS>     | bit= 82.4% | wrong
+PPO, KL-guard selected           | sample | 10010011001011100<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_6 | carry run=12
+Prompt:   1111001010111000+1001111111010111=
+Expected: 11110001010010011<EOS>
+Pretrained 128d                  | greedy | 11110001010001011<EOS>     | bit= 88.2% | wrong
+Pretrained 128d                  | sample | 11110001010010011<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 11110001010010011<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11110001010010011<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11110001010001011<EOS>     | bit= 88.2% | wrong
+PPO, first run final             | sample | 11110001010001011<EOS>     | bit= 88.2% | wrong
+PPO, first run best saved        | greedy | 11110001010010011<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11110001010010011<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11110001010010011<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11110001010010011<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11110001010010011<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11110001010010011<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_7 | carry run=10
+Prompt:   1011111011011110+1000011110110000=
+Expected: 01110001011000101<EOS>
+Pretrained 128d                  | greedy | 01110001011000101<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01110001011001101<EOS>     | bit= 94.1% | wrong
+SFT, first 128d run              | greedy | 01110001011000101<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01110001011000101<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01110001011001101<EOS>     | bit= 94.1% | wrong
+PPO, first run final             | sample | 01110001011001101<EOS>     | bit= 94.1% | wrong
+PPO, first run best saved        | greedy | 01110001011000101<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01110001011000101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01110001011000101<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01110001011000101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01110001011000101<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01110001011000101<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_8 | carry run=13
+Prompt:   1000010111011011+1001111011101111=
+Expected: 01010011001001001<EOS>
+Pretrained 128d                  | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 01010011001010001<EOS>     | bit= 88.2% | wrong
+SFT, first 128d run              | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 01010011001001001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 01010011001001001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 01010011001001001<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_9 | carry run=14
+Prompt:   0100111011110110+0111111100001110=
+Expected: 00100000011100110<EOS>
+Pretrained 128d                  | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+Pretrained 128d                  | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 00100000011100110<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 00100000011100110<EOS>     | bit=100.0% | EXACT
+
+================================================================================================
+16-bit long_carry_10 | carry run=13
+Prompt:   1111111101011100+0011110111101011=
+Expected: 11100010101111001<EOS>
+Pretrained 128d                  | greedy | 11100010101100101<EOS>     | bit= 82.4% | wrong
+Pretrained 128d                  | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | greedy | 11100010101111001<EOS>     | bit=100.0% | EXACT
+SFT, first 128d run              | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | greedy | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, first run final             | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | greedy | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, first run best saved        | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | greedy | 11100010101111001<EOS>     | bit=100.0% | EXACT
+SFT, KL-guard run                | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | greedy | 11100010101111001<EOS>     | bit=100.0% | EXACT
+PPO, KL-guard selected           | sample | 11100010101111001<EOS>     | bit=100.0% | EXACT

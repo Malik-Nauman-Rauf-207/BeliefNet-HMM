@@ -1,0 +1,168 @@
+
+[2-bit | greedy | SFT (KL-guard run)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[2-bit | greedy | GRPO (selected)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[2-bit | greedy | PPO (selected)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[2-bit | sample | SFT (KL-guard run)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[2-bit | sample | GRPO (selected)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[2-bit | sample | PPO (selected)]
+11+00= -> 110<EOS> | expected=110 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+00= -> 000<EOS> | expected=000 | exact=True | bit_acc=1.000
+00+10= -> 010<EOS> | expected=010 | exact=True | bit_acc=1.000
+01+00= -> 100<EOS> | expected=100 | exact=True | bit_acc=1.000
+
+[4-bit | greedy | SFT (KL-guard run)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[4-bit | greedy | GRPO (selected)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[4-bit | greedy | PPO (selected)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[4-bit | sample | SFT (KL-guard run)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[4-bit | sample | GRPO (selected)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[4-bit | sample | PPO (selected)]
+0111+1011= -> 01001<EOS> | expected=01001 | exact=True | bit_acc=1.000
+0110+1101= -> 11001<EOS> | expected=11001 | exact=True | bit_acc=1.000
+1110+0000= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+1100+0010= -> 01110<EOS> | expected=01110 | exact=True | bit_acc=1.000
+0010+0010= -> 00100<EOS> | expected=00100 | exact=True | bit_acc=1.000
+
+[8-bit | greedy | SFT (KL-guard run)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[8-bit | greedy | GRPO (selected)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[8-bit | greedy | PPO (selected)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[8-bit | sample | SFT (KL-guard run)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[8-bit | sample | GRPO (selected)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[8-bit | sample | PPO (selected)]
+01110110+10000010= -> 000111110<EOS> | expected=000111110 | exact=True | bit_acc=1.000
+10011000+00100000= -> 000111010<EOS> | expected=000111010 | exact=True | bit_acc=1.000
+00100110+10010101= -> 110111010<EOS> | expected=110111010 | exact=True | bit_acc=1.000
+10101010+10101111= -> 100110101<EOS> | expected=100110101 | exact=True | bit_acc=1.000
+11011001+11110011= -> 001100111<EOS> | expected=001100111 | exact=True | bit_acc=1.000
+
+[16-bit | greedy | SFT (KL-guard run)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011111010<EOS> | expected=00000001011111010 | exact=True | bit_acc=1.000
+
+[16-bit | greedy | GRPO (selected)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011111010<EOS> | expected=00000001011111010 | exact=True | bit_acc=1.000
+
+[16-bit | greedy | PPO (selected)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011111010<EOS> | expected=00000001011111010 | exact=True | bit_acc=1.000
+
+[16-bit | sample | SFT (KL-guard run)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011110101<EOS> | expected=00000001011111010 | exact=False | bit_acc=0.765
+
+[16-bit | sample | GRPO (selected)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011110101<EOS> | expected=00000001011111010 | exact=False | bit_acc=0.765
+
+[16-bit | sample | PPO (selected)]
+1000111000101110+0101100000011101= -> 11010010011001110<EOS> | expected=11010010011001110 | exact=True | bit_acc=1.000
+0001100110010100+1100001100010110= -> 01010101001110110<EOS> | expected=01010101001110110 | exact=True | bit_acc=1.000
+1100100101001111+0001111110111101= -> 00110000100101110<EOS> | expected=00110000100101110 | exact=True | bit_acc=1.000
+0001011111010001+1010111010111111= -> 00001001011000110<EOS> | expected=00001001011000110 | exact=True | bit_acc=1.000
+1010001101110100+0001101100001100= -> 00000001011110101<EOS> | expected=00000001011111010 | exact=False | bit_acc=0.765
