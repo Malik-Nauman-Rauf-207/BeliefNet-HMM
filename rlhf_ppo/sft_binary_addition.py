@@ -320,15 +320,15 @@ def plot_sft(rows, path, base_eval):
     """Same panels as the PPO trajectory plot, adapted to SFT: loss, accuracy vs the pretrained baseline, drift, entropy."""
     x = [r["step"] for r in rows]
     fig, ax = plt.subplots(2, 3, figsize=(16, 8))
-    ax[0, 0].plot(x, [r["train_ce"] for r in rows], color='#2ca02c', lw=2)
-    ax[0, 0].set_title("SFT train CE (response tokens, batch-weighted over scales)"); ax[0, 0].set_yscale("log")
+    ax[0, 0].plot(x, [math.exp(r["train_ce"]) for r in rows], color='#2ca02c', lw=2)
+    ax[0, 0].set_title("SFT train perplexity (response tokens, batch-weighted over scales)")
     for s in SCALES:
-        ax[0, 1].plot(x, [r[f"val_ce_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
+        ax[0, 1].plot(x, [math.exp(r[f"val_ce_s{s}"]) for r in rows], marker='o', label=f"{s}-bit")
         line, = ax[0, 2].plot(x, [r[f"eval_greedy_acc_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
         ax[0, 2].axhline(base_eval[f"eval_greedy_acc_s{s}"], color=line.get_color(), ls='--', alpha=0.6,
                          label=f"{s}-bit pretrained base")
         ax[1, 2].plot(x, [r[f"val_tokacc_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
-    ax[0, 1].set_title("SFT validation CE per scale"); ax[0, 1].set_yscale("log"); ax[0, 1].legend()
+    ax[0, 1].set_title("SFT validation perplexity per scale"); ax[0, 1].legend()
     ax[0, 2].set_title("Greedy exact-match on the fixed eval set (%)"); ax[0, 2].legend(fontsize=7)
     ax[1, 0].plot(x, [r["kl_base"] for r in rows], color='#d62728', lw=2)
     ax[1, 0].set_title("KL(pi || pretrained model) per response token (validation)")
@@ -336,7 +336,7 @@ def plot_sft(rows, path, base_eval):
     ax[1, 1].set_title("Policy entropy per response token (validation)")
     ax[1, 2].set_title("Validation token accuracy, teacher-forced (%)"); ax[1, 2].legend()
     for a in ax.flat:
-        a.set_xlabel("SFT step"); a.grid(True, ls=':', alpha=0.6)
+        a.set_xlabel("SFT step"); a.set_xscale("log"); a.grid(True, which="both", ls=':', alpha=0.6)
     plt.tight_layout()
     plt.savefig(path, dpi=200)
     plt.close(fig)

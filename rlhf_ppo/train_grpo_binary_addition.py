@@ -407,7 +407,7 @@ def plot_comparison(rows, path):
 
 def plot_training(rows, path):
     train = [r for r in rows if r["step"] > 0]
-    evals = [r for r in rows if "eval_greedy_acc_s16" in r]
+    evals = [r for r in rows if "eval_greedy_acc_s16" in r and r["step"] > 0]
     fig, axes = plt.subplots(2, 2, figsize=(12, 8))
     axes[0, 0].plot([r["step"] for r in train], [r["rollout_reward"] for r in train])
     axes[0, 0].set_title("Mean verifier reward (GRPO rollouts)")
@@ -421,7 +421,8 @@ def plot_training(rows, path):
     axes[1, 1].set_title("Within-prompt group reward spread")
     for ax in axes.flat:
         ax.set_xlabel("GRPO update")
-        ax.grid(True, linestyle=":", alpha=0.6)
+        ax.set_xscale("log")
+        ax.grid(True, which="both", linestyle=":", alpha=0.6)
     fig.tight_layout()
     fig.savefig(path, dpi=200)
     plt.close(fig)

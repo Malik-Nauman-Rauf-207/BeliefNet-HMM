@@ -408,15 +408,16 @@ def plot_sft(rows, path, base_eval):
     """Same panels as the PPO trajectory plot, adapted to SFT: loss, accuracy vs the pretrained baseline, drift, entropy."""
     x = [r["step"] for r in rows]
     fig, ax = plt.subplots(2, 3, figsize=(16, 8))
+    # This run's training objective includes carry CE, so it is not a language-model perplexity.
     ax[0, 0].plot(x, [r["train_ce"] for r in rows], color='#2ca02c', lw=2)
-    ax[0, 0].set_title("SFT objective (response CE + carry loss)"); ax[0, 0].set_yscale("log")
+    ax[0, 0].set_title("SFT objective (response CE + carry loss)")
     for s in SCALES:
-        ax[0, 1].plot(x, [r[f"val_ce_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
+        ax[0, 1].plot(x, [math.exp(r[f"val_ce_s{s}"]) for r in rows], marker='o', label=f"{s}-bit")
         line, = ax[0, 2].plot(x, [r[f"eval_greedy_acc_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
         ax[0, 2].axhline(base_eval[f"eval_greedy_acc_s{s}"], color=line.get_color(), ls='--', alpha=0.6,
                          label=f"{s}-bit pretrained base")
         ax[1, 2].plot(x, [r[f"val_tokacc_s{s}"] for r in rows], marker='o', label=f"{s}-bit")
-    ax[0, 1].set_title("SFT validation CE per scale"); ax[0, 1].set_yscale("log"); ax[0, 1].legend()
+    ax[0, 1].set_title("SFT validation perplexity per scale"); ax[0, 1].legend()
     ax[0, 2].set_title("Greedy exact-match on the fixed eval set (%)"); ax[0, 2].legend(fontsize=7)
     ax[1, 0].plot(x, [r["kl_base"] for r in rows], color='#d62728', lw=2)
     ax[1, 0].set_title("KL(pi || pretrained model) per response token (validation)")
@@ -424,7 +425,7 @@ def plot_sft(rows, path, base_eval):
     ax[1, 1].set_title("Policy entropy per response token (validation)")
     ax[1, 2].set_title("Validation token accuracy, teacher-forced (%)"); ax[1, 2].legend()
     for a in ax.flat:
-        a.set_xlabel("SFT step"); a.grid(True, ls=':', alpha=0.6)
+        a.set_xlabel("SFT step"); a.set_xscale("log"); a.grid(True, which="both", ls=':', alpha=0.6)
     plt.tight_layout()
     plt.savefig(path, dpi=200)
     plt.close(fig)
@@ -651,7 +652,7 @@ def run_ppo(actor, ref_model, critic, start_eval, validation_data, save_best, sa
 
 def plot_ppo(rows, base_eval, path, base_label="pretrained base", step0_label="step 0 = after SFT"):
     train = [r for r in rows if r["step"] > 0]
-    evals = [r for r in rows if "eval_greedy_acc_mean" in r]
+    evals = [r for r in rows if "eval_greedy_acc_mean" in r and r["step"] > 0]
     fig, ax = plt.subplots(2, 2, figsize=(12, 8))
     ax[0, 0].plot([r["step"] for r in train], [r["reward"] for r in train], color='#2ca02c', lw=2)
     ax[0, 0].axhline(2.0, color='gray', ls=':', label='max verifier score (+2)')
@@ -667,7 +668,7 @@ def plot_ppo(rows, base_eval, path, base_label="pretrained base", step0_label="s
     ax[1, 1].plot([r["step"] for r in train], [r["entropy"] for r in train], color='#1f77b4', lw=2)
     ax[1, 1].set_title("Policy entropy per response token")
     for a in ax.flat:
-        a.set_xlabel("PPO step"); a.grid(True, ls=':', alpha=0.6)
+        a.set_xlabel("PPO step"); a.set_xscale("log"); a.grid(True, which="both", ls=':', alpha=0.6)
     plt.tight_layout()
     plt.savefig(path, dpi=200)
     plt.close(fig)
@@ -681,13 +682,14 @@ def plot_pipeline(base_eval, sft_rows, ppo_rows, path):
     for j, mode in enumerate(("greedy", "sample")):
         for s in SCALES:
             key = f"eval_{mode}_acc_s{s}"
-            xs = [0] + [r["step"] for r in sft_rows] + [SFT_STEPS + r["step"] for r in ppo_rows if key in r and r["step"] > 0]
-            ys = [base_eval[key]] + [r[key] for r in sft_rows] + [r[key] for r in ppo_rows if key in r and r["step"] > 0]
+            xs = [r["step"] for r in sft_rows] + [SFT_STEPS + r["step"] for r in ppo_rows if key in r and r["step"] > 0]
+            ys = [r[key] for r in sft_rows] + [r[key] for r in ppo_rows if key in r and r["step"] > 0]
             ax[j].plot(xs, ys, marker='o', ms=3, label=f"{s}-bit")
+            ax[j].scatter([0.1], [base_eval[key]], marker="x", s=45, label=f"{s}-bit pretrained (step 0)")
         ax[j].axvline(SFT_STEPS, color='gray', ls=':')
         ax[j].text(SFT_STEPS, ax[j].get_ylim()[0], " SFT | PPO", va='bottom', fontsize=9)
-        ax[j].set_title(f"{mode.capitalize()} exact-match (%) across the pipeline  (x=0: pretrained base)")
-        ax[j].set_xlabel("SFT steps, then PPO steps"); ax[j].grid(True, ls=':', alpha=0.6); ax[j].legend()
+        ax[j].set_title(f"{mode.capitalize()} exact-match (%) across the pipeline  (base shown left of step 1)")
+        ax[j].set_xlabel("SFT steps, then PPO steps"); ax[j].set_xscale("log"); ax[j].grid(True, which="both", ls=':', alpha=0.6); ax[j].legend()
     plt.tight_layout()
     plt.savefig(path, dpi=200)
     plt.close(fig)

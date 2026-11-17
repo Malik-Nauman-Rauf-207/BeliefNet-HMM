@@ -6,6 +6,8 @@ Run from the NanoGPT directory, for example:
 Outputs per run: loss_curves.png, accuracy_by_scale.png, carry_run_accuracy.png,
 attention_maps.png, evaluation_metrics.csv/.json, and rollout_examples.csv.
 Also writes loss_comparison.png when multiple runs are supplied.
+For multiple runs, also writes evaluation_comparison.png with random and
+long-carry exact-match and bitwise accuracy.
 """
 
 import argparse
@@ -21,6 +23,7 @@ import h5py
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -35,6 +38,9 @@ from model import GPT, GPTConfig
 TOKENS = ["0", "1", "+", "=", "<EOS>", "<PAD>"]
 STOI = {ch: i for i, ch in enumerate(TOKENS)}
 ITOS = {i: ch for i, ch in enumerate(TOKENS)}
+ATTENTION_CMAP = LinearSegmentedColormap.from_list(
+    "soft_sage_teal", ["#f1f4f2", "#d9e8e3", "#aecfc6", "#7eaaa6", "#4c7883"]
+)
 TOK_EOS = STOI["<EOS>"]
 SCALES = [2, 4, 8, 16]
 
@@ -231,23 +237,30 @@ def select_examples(examples, limit):
 def plot_loss(history, run_label, out_path):
     fig, ax = plt.subplots(figsize=(10, 6))
     train_x = history["training_iters"]
-    train_y = history["training_loss"]
+    # Cross-entropy is measured in nats; exp(CE) is token perplexity.
+    train_ce = history["training_loss"]
+    train_y = np.exp(train_ce)
     val_x = history["validation_iters"]
-    val_y = history["validation_loss"]
+    val_y = np.exp(history["validation_loss"])
+    train_mask = train_x > 0
+    val_mask = val_x > 0
+    train_x, train_ce = train_x[train_mask], train_ce[train_mask]
+    train_y = np.exp(train_ce)
+    val_x, val_y = val_x[val_mask], val_y[val_mask]
     if len(train_x):
-        ax.plot(train_x, train_y, color="#9ecae1", alpha=0.45, lw=0.8, label="Training loss (raw)")
-        ma = moving_average(train_y)
+        ax.plot(train_x, train_y, color="#9ecae1", alpha=0.45, lw=0.8, label="Training perplexity (raw)")
+        ma = moving_average(train_ce)
         ma_x = train_x[len(train_x) - len(ma):]
-        ax.plot(ma_x, ma, color="#2171b5", lw=2, label="Training loss (25-step moving average)")
+        ax.plot(ma_x, np.exp(ma), color="#2171b5", lw=2, label="Training perplexity (25-step CE moving average)")
     if len(val_x):
-        ax.plot(val_x, val_y, marker="o", ms=4, color="#d62728", lw=1.8, label="Validation loss")
+        ax.plot(val_x, val_y, marker="o", ms=4, color="#d62728", lw=1.8, label="Validation perplexity")
         best = int(np.argmin(val_y))
         ax.scatter([val_x[best]], [val_y[best]], color="#2ca02c", zorder=5,
-                   label=f"Best validation: {val_y[best]:.4f} at iter {val_x[best]}")
-    ax.set_title(f"Pretraining loss — {run_label}")
+                   label=f"Best validation PPL: {val_y[best]:.3f} at iter {val_x[best]}")
+    ax.set_title(f"Pretraining perplexity — {run_label}")
     ax.set_xlabel("Iteration")
-    ax.set_ylabel("Cross-entropy loss (nats)")
-    ax.set_yscale("log")
+    ax.set_ylabel("Perplexity (exp of token cross-entropy)")
+    ax.set_xscale("log")
     ax.grid(True, which="both", ls=":", alpha=0.45)
     ax.legend()
     fig.tight_layout()
@@ -311,6 +324,38 @@ def plot_carry_accuracy(metrics, run_label, out_path):
     plt.close(fig)
 
 
+def plot_carry_accuracy_comparison(runs, out_path):
+    """Compare exact accuracy by carry-chain length across all supplied runs."""
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5), sharey=True)
+    colors = ("#58788c", "#75a9a0", "#c99872", "#9a8cae")
+    for ax, scale in zip(axes, (8, 16)):
+        for i, run in enumerate(runs):
+            rows = sorted((r for r in run["metrics"]
+                           if r["scale"] == scale and r["split"] == "carry_run" and r["n"] >= 3),
+                          key=lambda row: row["carry_run"])
+            if rows:
+                label = run["label"]
+                if "rope_learnable" in label:
+                    label = "Learnable-frequency RoPE"
+                elif "rope_fixed" in label:
+                    label = "Fixed-frequency RoPE"
+                elif "multiscale" in label:
+                    label = "Absolute positions"
+                ax.plot([r["carry_run"] for r in rows],
+                        [r["exact_accuracy_pct"] for r in rows], marker="o", ms=4,
+                        lw=2, color=colors[i % len(colors)], label=label)
+        ax.set_title(f"{scale}-bit problems")
+        ax.set_xlabel("Longest consecutive carry-out run")
+        ax.set_ylim(0, 105)
+        ax.grid(True, ls=":", alpha=.5)
+        ax.legend(fontsize=8)
+    axes[0].set_ylabel("Exact-match accuracy (%)")
+    fig.suptitle("Exact accuracy by carry-chain length")
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=220)
+    plt.close(fig)
+
+
 def attention_maps(model, device, out_path, scale=16, a=0x7FFF, b=1):
     prompt, expected = format_prompt(a, b, scale)
     full_seq = prompt + [STOI[c] for c in expected] + [TOK_EOS]
@@ -325,10 +370,16 @@ def attention_maps(model, device, out_path, scale=16, a=0x7FFF, b=1):
             q, k, _ = module.c_attn(hidden).split(module.n_embd, dim=2)
             q = q.view(batch, length, module.n_head, channels // module.n_head).transpose(1, 2)
             k = k.view(batch, length, module.n_head, channels // module.n_head).transpose(1, 2)
+            if module.rotary is not None:
+                positions = torch.arange(length, device=hidden.device)
+                cos, sin = module.rotary(positions, q.dtype)
+                q, k = module.apply_rotary(q, k, cos, sin)
             scores = (q @ k.transpose(-2, -1)) / np.sqrt(k.size(-1))
             causal = torch.tril(torch.ones(length, length, device=hidden.device, dtype=torch.bool))
             weights = F.softmax(scores.masked_fill(~causal, float("-inf")), dim=-1)
-            attn_by_layer[layer_idx] = weights[0].mean(dim=0).detach().cpu().numpy()
+            # Preserve every head separately. Averaging heads hides distinct
+            # attention patterns, so the grid below shows one panel per head.
+            attn_by_layer[layer_idx] = weights[0].detach().cpu().numpy()
         return hook
 
     for i, block in enumerate(model.transformer.h):
@@ -338,19 +389,33 @@ def attention_maps(model, device, out_path, scale=16, a=0x7FFF, b=1):
     for hook in hooks:
         hook.remove()
 
-    fig, axes = plt.subplots(1, len(attn_by_layer), figsize=(5 * len(attn_by_layer), 5), squeeze=False)
+    n_layers = len(attn_by_layer)
+    n_heads = next(iter(attn_by_layer.values())).shape[0]
+    fig, axes = plt.subplots(n_layers, n_heads,
+                             figsize=(4.2 * n_heads, 3.6 * n_layers),
+                             squeeze=False, sharex=True, sharey=True)
     labels = [ITOS[t] for t in full_seq]
-    for i, ax in enumerate(axes[0]):
-        image = ax.imshow(attn_by_layer[i], cmap="Blues", vmin=0, vmax=1, aspect="auto")
-        ax.set_title(f"Layer {i}, mean over heads")
-        ax.set_xlabel("Key position")
-        ax.set_ylabel("Query position")
-        tick_positions = list(range(0, len(labels), 4))
-        ax.set_xticks(tick_positions, [labels[j] for j in tick_positions], rotation=0)
-        ax.set_yticks(tick_positions, [labels[j] for j in tick_positions])
-        fig.colorbar(image, ax=ax, fraction=0.046, pad=0.04)
-    fig.suptitle(f"Attention maps on {scale}-bit carry-chain example: {a} + {b}")
-    fig.tight_layout()
+    image = None
+    for layer_idx in range(n_layers):
+        for head_idx in range(n_heads):
+            ax = axes[layer_idx, head_idx]
+            image = ax.imshow(attn_by_layer[layer_idx][head_idx], cmap=ATTENTION_CMAP,
+                              vmin=0, vmax=1, aspect="auto")
+            ax.set_title(f"Layer {layer_idx + 1}, Head {head_idx + 1}")
+            if layer_idx == n_layers - 1:
+                ax.set_xlabel("Key position")
+            if head_idx == 0:
+                ax.set_ylabel("Query position")
+    tick_positions = sorted(set(range(0, len(labels), max(1, len(labels) // 10))) | {len(labels) - 1})
+    tick_labels = [str(j) for j in tick_positions]
+    for ax in axes[-1, :]:
+        ax.set_xticks(tick_positions, tick_labels, rotation=60, ha="right", fontsize=7)
+    for ax in axes[:, 0]:
+        ax.set_yticks(tick_positions, tick_labels, fontsize=7)
+    fig.suptitle(f"Per-head causal attention on {scale}-bit carry-chain example: {a} + {b}")
+    fig.subplots_adjust(left=0.07, right=0.94, bottom=0.12, top=0.94, hspace=0.24, wspace=0.12)
+    colorbar_axis = fig.add_axes([0.955, 0.16, 0.012, 0.68])
+    fig.colorbar(image, cax=colorbar_axis, label="Attention probability")
     fig.savefig(out_path, dpi=220)
     plt.close(fig)
 
@@ -411,28 +476,90 @@ def process_run(run_path, output_root, device, args):
     with open(os.path.join(out_dir, "evaluation_metrics.json"), "w") as f:
         json.dump(json_safe(report), f, indent=2)
     print(f"[{label}] wrote plots and metrics to {out_dir}")
-    return {"label": label, "history": history, "out_dir": out_dir}
+    return {"label": label, "history": history, "metrics": metrics, "out_dir": out_dir}
 
 
 def plot_loss_comparison(runs, out_path):
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     for run in runs:
         history, label = run["history"], run["label"]
-        train_x, train_y = history["training_iters"], history["training_loss"]
-        val_x, val_y = history["validation_iters"], history["validation_loss"]
-        if len(train_y):
-            ma = moving_average(train_y)
-            axes[0].plot(train_x[len(train_x) - len(ma):], ma, lw=2, label=label)
-        if len(val_y):
-            axes[1].plot(val_x, val_y, marker="o", ms=3, lw=1.5, label=label)
-    axes[0].set_title("Training loss (moving average)")
-    axes[1].set_title("Validation loss")
+        if "rope_learnable" in label:
+            label = "Learnable-frequency RoPE"
+        elif "rope_fixed" in label:
+            label = "Fixed-frequency RoPE"
+        elif "multiscale" in label:
+            label = "Absolute positions"
+        train_x, train_ce = history["training_iters"], history["training_loss"]
+        val_x, val_ce = history["validation_iters"], history["validation_loss"]
+        train_mask, val_mask = train_x > 0, val_x > 0
+        train_x, train_ce = train_x[train_mask], train_ce[train_mask]
+        val_x, val_ce = val_x[val_mask], val_ce[val_mask]
+        if len(train_ce):
+            ma = moving_average(train_ce)
+            axes[0].plot(train_x[len(train_x) - len(ma):], np.exp(ma), lw=2, label=label)
+        if len(val_ce):
+            axes[1].plot(val_x, np.exp(val_ce), marker="o", ms=3, lw=1.5, label=label)
+    axes[0].set_title("Training perplexity (moving average)")
+    axes[1].set_title("Validation perplexity")
     for ax in axes:
         ax.set_xlabel("Iteration")
-        ax.set_ylabel("Cross-entropy loss (nats)")
-        ax.set_yscale("log")
+        ax.set_ylabel("Perplexity")
+        ax.set_xscale("log")
         ax.grid(True, which="both", ls=":", alpha=0.45)
         ax.legend()
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=220)
+    plt.close(fig)
+
+
+def plot_evaluation_comparison(runs, out_path):
+    """Compare random and long-carry exact/bitwise scores for multiple checkpoints."""
+    panels = [
+        ("random", "exact_accuracy_pct", "Random prompts: exact match", SCALES),
+        ("random", "bit_accuracy_pct", "Random prompts: bitwise accuracy", SCALES),
+        ("long_carry", "exact_accuracy_pct", "Long-carry prompts: exact match", [8, 16]),
+        ("long_carry", "bit_accuracy_pct", "Long-carry prompts: bitwise accuracy", [8, 16]),
+    ]
+    colors = ("#58788c", "#75a9a0", "#c99872", "#9a8cae")
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    for ax, (split, metric_key, title, scales) in zip(axes.ravel(), panels):
+        x = np.arange(len(scales))
+        width = 0.78 / max(1, len(runs))
+        for run_index, run in enumerate(runs):
+            source_label = run["label"]
+            if "rope_learnable" in source_label:
+                display_label = "Learnable-frequency RoPE"
+            elif "rope_fixed" in source_label:
+                display_label = "Fixed-frequency RoPE"
+            elif "multiscale" in source_label:
+                display_label = "Absolute positions"
+            else:
+                display_label = source_label
+            values = []
+            for scale in scales:
+                row = next((r for r in run["metrics"]
+                            if r["scale"] == scale and r["split"] == split), None)
+                values.append(float(row[metric_key]) if row and row[metric_key] != "" else np.nan)
+            offset = (run_index - (len(runs) - 1) / 2) * width
+            ax.bar(x + offset, values, width, label=display_label,
+                   color=colors[run_index % len(colors)])
+        ax.set_xticks(x, [f"{scale}-bit" for scale in scales])
+        ax.set_ylim(0, 105)
+        ax.set_ylabel("Accuracy (%)")
+        ax.set_title(title)
+        ax.grid(axis="y", ls=":", alpha=0.45)
+        ax.legend(fontsize=8)
+    labels = [run["label"] for run in runs]
+    has_learnable = any("rope_learnable" in label for label in labels)
+    has_fixed = any("rope_fixed" in label for label in labels)
+    has_absolute = any("multiscale" in label for label in labels)
+    if has_learnable and has_fixed and has_absolute:
+        title = "Absolute positions versus fixed and learnable-frequency RoPE"
+    elif has_learnable:
+        title = "Comparison including learnable-frequency RoPE"
+    else:
+        title = "Binary-addition position-encoding comparison"
+    fig.suptitle(title, fontsize=14)
     fig.tight_layout()
     fig.savefig(out_path, dpi=220)
     plt.close(fig)
@@ -448,6 +575,8 @@ def main():
     runs = [process_run(path, output_root, device, args) for path in args.out_dirs]
     if len(runs) > 1:
         plot_loss_comparison(runs, os.path.join(output_root, "loss_comparison.png"))
+        plot_evaluation_comparison(runs, os.path.join(output_root, "evaluation_comparison.png"))
+        plot_carry_accuracy_comparison(runs, os.path.join(output_root, "carry_comparison.png"))
     print(f"All visualization artifacts are under: {output_root}")
 
 

@@ -42,6 +42,9 @@ n_head = 12
 n_embd = 768
 dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
 bias = False # do we use bias inside LayerNorm and Linear layers?
+positional_embedding = 'absolute' # 'absolute' or 'rope'
+rope_learnable_freq = False # when using RoPE, learn one frequency schedule per head
+rope_theta = 10000.0
 # adamw optimizer
 learning_rate = 6e-4 # max learning rate
 max_iters = 600000 # total number of training iterations
@@ -105,7 +108,9 @@ best_val_loss = 1e9
 
 # model init
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
-                  bias=bias, vocab_size=None, dropout=dropout) # start with model_args from command line
+                  bias=bias, vocab_size=None, dropout=dropout,
+                  positional_embedding=positional_embedding,
+                  rope_learnable_freq=rope_learnable_freq, rope_theta=rope_theta)
 if init_from == 'scratch':
     # init a new model from scratch
     print("Initializing a new model from scratch")
@@ -125,8 +130,14 @@ elif init_from == 'resume':
     checkpoint_model_args = checkpoint['model_args']
     # force these config attributes to be equal otherwise we can't even resume training
     # the rest of the attributes (e.g. dropout) can stay as desired from command line
-    for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size']:
-        model_args[k] = checkpoint_model_args[k]
+    checkpoint_defaults = {
+        'positional_embedding': 'absolute',
+        'rope_learnable_freq': False,
+        'rope_theta': 10000.0,
+    }
+    for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size',
+              'positional_embedding', 'rope_learnable_freq', 'rope_theta']:
+        model_args[k] = checkpoint_model_args.get(k, checkpoint_defaults.get(k))
     # create the model
     gptconf = GPTConfig(**model_args)
     model = GPT(gptconf)

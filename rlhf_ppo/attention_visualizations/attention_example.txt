@@ -1,0 +1,6 @@
+Bits: 16
+Prompt: 0111111111111111+0000000000000001=
+Teacher-forced target: 00000000000000010<EOS>
+Full sequence: 0111111111111111+0000000000000001=00000000000000010<EOS>
+Sequence token count: 52
+Each heatmap is causal attention over this same complete sequence.

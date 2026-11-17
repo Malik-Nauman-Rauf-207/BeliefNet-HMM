@@ -26,6 +26,35 @@ class LayerNorm(nn.Module):
     def forward(self, input):
         return F.layer_norm(input, self.weight.shape, self.weight, self.bias, 1e-5)
 
+
+class RotaryEmbedding(nn.Module):
+    """RoPE angles, with either fixed or learnable inverse frequencies.
+
+    Learnable frequencies are per attention head and initialized to the standard
+    geometric schedule. Storing their logarithms keeps frequencies positive.
+    """
+
+    def __init__(self, head_dim, n_head, theta=10000.0, learnable=False):
+        super().__init__()
+        if head_dim % 2:
+            raise ValueError(f"RoPE needs an even head dimension, got {head_dim}.")
+        inv_freq = 1.0 / (theta ** (torch.arange(0, head_dim, 2, dtype=torch.float32) / head_dim))
+        self.learnable = learnable
+        if learnable:
+            self.log_inv_freq = nn.Parameter(inv_freq.log().unsqueeze(0).repeat(n_head, 1))
+        else:
+            self.register_buffer("inv_freq", inv_freq, persistent=False)
+
+    def forward(self, positions, dtype):
+        inv_freq = self.log_inv_freq.exp() if self.learnable else self.inv_freq
+        if not self.learnable:
+            # Add a singleton head axis so fixed frequencies broadcast over
+            # both sequence positions and all attention heads.
+            inv_freq = inv_freq.unsqueeze(0)
+        angles = positions.to(inv_freq.dtype).view(1, -1, 1) * inv_freq.unsqueeze(1)
+        return angles.cos().to(dtype=dtype).unsqueeze(0), angles.sin().to(dtype=dtype).unsqueeze(0)
+
+
 class CausalSelfAttention(nn.Module):
 
     def __init__(self, config):
@@ -41,6 +70,16 @@ class CausalSelfAttention(nn.Module):
         self.n_head = config.n_head
         self.n_embd = config.n_embd
         self.dropout = config.dropout
+        self.rotary = None
+        if config.positional_embedding == "rope":
+            self.rotary = RotaryEmbedding(
+                self.n_embd // self.n_head,
+                self.n_head,
+                theta=config.rope_theta,
+                learnable=config.rope_learnable_freq,
+            )
+        elif config.positional_embedding != "absolute":
+            raise ValueError("positional_embedding must be 'absolute' or 'rope'.")
         # flash attention make GPU go brrrrr but support is only in PyTorch >= 2.0
         self.flash = hasattr(torch.nn.functional, 'scaled_dot_product_attention')
         if not self.flash:
@@ -57,6 +96,10 @@ class CausalSelfAttention(nn.Module):
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
+        if self.rotary is not None:
+            positions = torch.arange(T, device=x.device)
+            cos, sin = self.rotary(positions, q.dtype)
+            q, k = self.apply_rotary(q, k, cos, sin)
 
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
         if self.flash:
@@ -74,6 +117,15 @@ class CausalSelfAttention(nn.Module):
         # output projection
         y = self.resid_dropout(self.c_proj(y))
         return y
+
+    @staticmethod
+    def apply_rotary(q, k, cos, sin):
+        """Rotate adjacent even/odd coordinates of each query and key vector."""
+        def rotate(x):
+            pair = x.reshape(*x.shape[:-1], x.shape[-1] // 2, 2)
+            even, odd = pair[..., 0], pair[..., 1]
+            return torch.stack((even * cos - odd * sin, odd * cos + even * sin), dim=-1).flatten(-2)
+        return rotate(q), rotate(k)
 
 class MLP(nn.Module):
 
@@ -114,6 +166,9 @@ class GPTConfig:
     n_embd: int = 768
     dropout: float = 0.0
     bias: bool = True # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
+    positional_embedding: str = "absolute" # "absolute" or "rope"
+    rope_learnable_freq: bool = False
+    rope_theta: float = 10000.0
 
 class GPT(nn.Module):
 
@@ -123,13 +178,19 @@ class GPT(nn.Module):
         assert config.block_size is not None
         self.config = config
 
-        self.transformer = nn.ModuleDict(dict(
+        if config.positional_embedding not in ("absolute", "rope"):
+            raise ValueError("positional_embedding must be 'absolute' or 'rope'.")
+        # Construct wpe in its original position for all variants. RoPE drops
+        # this temporary table after initialization so shared weights begin
+        # from the same seed-dependent values in absolute and RoPE experiments.
+        transformer_parts = dict(
             wte = nn.Embedding(config.vocab_size, config.n_embd),
             wpe = nn.Embedding(config.block_size, config.n_embd),
             drop = nn.Dropout(config.dropout),
             h = nn.ModuleList([Block(config) for _ in range(config.n_layer)]),
             ln_f = LayerNorm(config.n_embd, bias=config.bias),
-        ))
+        )
+        self.transformer = nn.ModuleDict(transformer_parts)
         self.lm_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
         # with weight tying when using torch.compile() some warnings get generated:
         # "UserWarning: functional_call was passed multiple values for tied weights.
@@ -144,6 +205,9 @@ class GPT(nn.Module):
             if pn.endswith('c_proj.weight'):
                 torch.nn.init.normal_(p, mean=0.0, std=0.02/math.sqrt(2 * config.n_layer))
 
+        if config.positional_embedding == "rope":
+            del self.transformer["wpe"]
+
         # report number of parameters
         print("number of parameters: %.2fM" % (self.get_num_params()/1e6,))
 
@@ -155,7 +219,7 @@ class GPT(nn.Module):
         params are actually used as weights in the final layer, so we include them.
         """
         n_params = sum(p.numel() for p in self.parameters())
-        if non_embedding:
+        if non_embedding and hasattr(self.transformer, "wpe"):
             n_params -= self.transformer.wpe.weight.numel()
         return n_params
 
@@ -171,12 +235,14 @@ class GPT(nn.Module):
         device = idx.device
         b, t = idx.size()
         assert t <= self.config.block_size, f"Cannot forward sequence of length {t}, block size is only {self.config.block_size}"
-        pos = torch.arange(0, t, dtype=torch.long, device=device) # shape (t)
-
         # forward the GPT model itself
         tok_emb = self.transformer.wte(idx) # token embeddings of shape (b, t, n_embd)
-        pos_emb = self.transformer.wpe(pos) # position embeddings of shape (t, n_embd)
-        x = self.transformer.drop(tok_emb + pos_emb)
+        x = tok_emb
+        if self.config.positional_embedding == "absolute":
+            pos = torch.arange(0, t, dtype=torch.long, device=device)
+            pos_emb = self.transformer.wpe(pos) # position embeddings of shape (t, n_embd)
+            x = x + pos_emb
+        x = self.transformer.drop(x)
         for block in self.transformer.h:
             x = block(x)
         x = self.transformer.ln_f(x)
@@ -198,7 +264,8 @@ class GPT(nn.Module):
         # but want to use a smaller block size for some smaller, simpler model
         assert block_size <= self.config.block_size
         self.config.block_size = block_size
-        self.transformer.wpe.weight = nn.Parameter(self.transformer.wpe.weight[:block_size])
+        if hasattr(self.transformer, "wpe"):
+            self.transformer.wpe.weight = nn.Parameter(self.transformer.wpe.weight[:block_size])
         for block in self.transformer.h:
             if hasattr(block.attn, 'bias'):
                 block.attn.bias = block.attn.bias[:,:,:block_size,:block_size]
@@ -267,8 +334,10 @@ class GPT(nn.Module):
         param_dict = {pn: p for pn, p in param_dict.items() if p.requires_grad}
         # create optim groups. Any parameters that is 2D will be weight decayed, otherwise no.
         # i.e. all weight tensors in matmuls + embeddings decay, all biases and layernorms don't.
-        decay_params = [p for n, p in param_dict.items() if p.dim() >= 2]
-        nodecay_params = [p for n, p in param_dict.items() if p.dim() < 2]
+        decay_params = [p for n, p in param_dict.items()
+                        if p.dim() >= 2 and not n.endswith("rotary.log_inv_freq")]
+        nodecay_params = [p for n, p in param_dict.items()
+                          if p.dim() < 2 or n.endswith("rotary.log_inv_freq")]
         optim_groups = [
             {'params': decay_params, 'weight_decay': weight_decay},
             {'params': nodecay_params, 'weight_decay': 0.0}

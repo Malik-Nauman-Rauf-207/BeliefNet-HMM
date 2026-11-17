@@ -400,7 +400,7 @@ def run_ppo(actor, ref_model, critic, start_eval, save_best, save_final):
 
 def plot_ppo(rows, base_eval, path, base_label="pretrained base", step0_label="step 0 = after SFT"):
     train = [r for r in rows if r["step"] > 0]
-    evals = [r for r in rows if "eval_greedy_acc_mean" in r]
+    evals = [r for r in rows if "eval_greedy_acc_mean" in r and r["step"] > 0]
     fig, ax = plt.subplots(2, 2, figsize=(12, 8))
     ax[0, 0].plot([r["step"] for r in train], [r["reward"] for r in train], color='#2ca02c', lw=2)
     ax[0, 0].axhline(2.0, color='gray', ls=':', label='max verifier score (+2)')
@@ -416,7 +416,7 @@ def plot_ppo(rows, base_eval, path, base_label="pretrained base", step0_label="s
     ax[1, 1].plot([r["step"] for r in train], [r["entropy"] for r in train], color='#1f77b4', lw=2)
     ax[1, 1].set_title("Policy entropy per response token")
     for a in ax.flat:
-        a.set_xlabel("PPO step"); a.grid(True, ls=':', alpha=0.6)
+        a.set_xlabel("PPO step"); a.set_xscale("log"); a.grid(True, which="both", ls=':', alpha=0.6)
     plt.tight_layout()
     plt.savefig(path, dpi=200)
     plt.close(fig)
